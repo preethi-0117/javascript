@@ -1,0 +1,278 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="resumebuilder.js" type="text/javaScript"></script>
+   <!-- <script src="template.js"></script> -->
+<style>
+
+        body{
+            background-color:steelblue
+        }
+
+       
+    </style>
+</head>
+<body>
+    <h1>View Resume</h1>
+
+<label><h4>Title</h4></label>
+<h5 id="title"></h5>
+
+<label><h4>Name</h4></label>
+<h5 id="name"></h5>
+
+<label><h4>Email</h4></label>
+<h5 id="email"></h5><br<br>
+
+<label><h4>Contact</h4></label>
+<h5 id="phone"></h5>
+
+<label><h4>Linkedin</h4></label>
+<h5 id="phone"></h5>
+
+<label><h4>Github</h4></label>
+<h5 id="github"></h5>
+
+<label><h4>Address</h4></label>
+<h5 id="address"></h5>
+
+<label><h4>Objectives</h4></label>
+<h5 id="objectives"></h5>
+
+<h4>Skills</h4>
+    <ul id="skill">
+
+    </ul>
+
+
+<label><h4>Education</h4></label>
+<table border="1">
+   
+<thead>
+    <th>Course_name</th>
+    <th>Inst_name</th>
+    <th>Percentage</th>
+    <th>Year</th>
+</thead>
+<tbody id="trs">
+
+</tbody>
+</table><br>
+
+ <h4>Projects</h4>
+<table border="1">
+    <thead>
+        
+        <th>Project_title</th>
+        <th>Duration</th>
+        <th>Team size</th>
+        <th>Organization</th>
+    </thead>
+    <tbody id="project">
+    
+    </tbody>
+    </table><br><br>
+
+   <h4>Experience</h4>
+    <table border="1">
+        <thead>
+            <th>Company Name</th>
+            <th>Year_of_Experience</th>
+        </thead>
+        <tbody id="experience">
+
+        </tbody>
+    </table><br><br>
+
+    <h4>Certificates</h4>
+    <table border="1">
+        <thead>
+            <th>course_name</th>
+            <th>year</th>
+        </thead>
+        <tbody id="view_certificates">
+
+        </tbody>
+    </table>
+
+
+    <h3>Personal_details</h3>
+
+    <h4>Father name</h4>
+    <h5 id="view_fname"></h5>
+
+    <h4>Mother name</h4>
+    <h5 id="view_mname"></h5>
+
+    <h4>DOb</h4>
+    <h5 id="view_dob"></h5>
+
+    <h4>Gender</h4>
+    <h5 id="view_gender"></h5>
+
+   
+
+    <h4>Languages_known</h4>
+    <ul id="view_language"></ul>
+
+    <h4>Hobbies</h4>
+    <ul id="view_hobby">
+
+
+    </ul>
+
+     <label><h4>Declaration</h4></label>
+    <h5 id="declare"></h5>
+
+
+    <ul> <li><a href="#" onclick="gototemplate(1)">Template 1</a></li>
+         <li><a href="#" onclick="gototemplate(2)">Template 2</a></li>
+         <li><a href="#" onclick="gototemplate(3)">Template 3</a></li>
+         <li><a href="#" onclick="gototemplate(4)">Template 4</a></li>
+         <!-- <li><a href="#" onclick="goToTemplate(5)">Template 5</li>  -->
+    </ul>
+
+</body>
+<script>
+
+    let params = new URLSearchParams(document.location.search);
+    let index = params.get("index");
+
+    let data=localStorage.getItem("detail")
+    let converted=JSON.parse(data);
+
+//to show values in view html
+
+    document.getElementById("title").innerHTML=converted[index].title;
+    document.getElementById("name").innerHTML=converted[index].name;
+    document.getElementById("phone").innerHTML=converted[index].phone;
+    document.getElementById("email").innerHTML=converted[index].email;
+    document.getElementById("address").innerHTML=converted[index].address;
+    document.getElementById("objectives").innerHTML=converted[index].objectives;
+    document.getElementById("view_fname").innerHTML=converted[index].personal_details.fathername;
+    document.getElementById("view_mname").innerHTML=converted[index].personal_details.mothername;
+    document.getElementById("view_dob").innerHTML=converted[index].personal_details.dob;
+    document.getElementById("view_gender").innerHTML=converted[index].personal_details.gender;
+   
+    document.getElementById("declare").innerHTML=converted[index].declaration;
+    
+ //to show education in view html 
+
+let trs=""
+
+for (let each of converted[index].education){
+    trs=trs + `<tr> 
+        <td> ${each.course_name}</td>
+        <td> ${each.ins_name}</td>
+        <td> ${each.percentage}</td>
+        <td> ${each.year}</td>
+        </tr>`
+        
+    }
+    document.getElementById("trs").innerHTML=trs
+
+//to show certification in view html
+
+let certify="" 
+
+for (let each of converted[index].certificates){
+    certify= certify + `<tr>
+        <td>${each.course_name}</td>
+        <td>${each.year}</td>
+        </tr>`
+}
+
+document.getElementById("view_certificates").innerHTML=certify
+
+//to show projects value in view html 
+
+let project=""
+
+for (let each of converted[index].projects){
+    project=project + `<tr>
+        <td>${each.project_name}</td>
+        <td>${each.duration}</td>
+        <td>${each.team_size}</td>
+        <td>${each.organization}</td>
+        </tr>`
+    }
+
+   document.getElementById("project").innerHTML=project
+
+
+//to show experience value in view html
+
+let experienced=""
+
+for (let each of converted[index].experience){
+    experienced=experienced + `<tr>
+        <td>${each.company_name}</td>
+        <td>${each.year_of_experience}</td>
+        </tr>`
+}
+
+document.getElementById("experience").innerHTML=experienced
+
+//to show skills in view html
+
+let skill=""
+
+for (let each of converted[index].skills){
+    skill= skill + `<li>${each}</li>`
+}
+
+document.getElementById("skill").innerHTML=skill
+
+//to show hobbies in view page
+
+let hobby=""
+
+for (let each of converted[index].personal_details.hobbies){
+    hobby= hobby + `<li>${each}</li>`
+}
+
+document.getElementById("view_hobby").innerHTML=hobby
+
+//to show language in view page
+
+let language=""
+for (let each of converted[index].personal_details.languages_known){
+    language=language + `<li>${each}</li>`
+}
+document.getElementById("view_language").innerHTML=language
+
+
+//template selecting function
+
+function gototemplate(template_id){
+    if(template_id==1){
+        window.location=`template_1/index.html?index=${index}`
+        
+    }
+    else if(template_id==2){
+        window.location=`template_2/index.html?index=${index}`
+
+    }
+    else if(template_id==3){
+        window.location=`template_3/index.html?index=${index}`
+
+    }
+    else if(template_id==4){
+        window.location=`template_4/index.html?index=${index}`
+
+    }
+}
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+

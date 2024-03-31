@@ -1,0 +1,23 @@
+.main{
+    margin-left:25px;
+    margin-top: 10px;
+    display:flex;
+    
+}
+
+.input_container{
+    padding:5px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.code_preview{
+    color:purple;
+    
+}
+input{
+    padding-top:10px; 
+}
+body{
+    background-color:aquamarine;
+}

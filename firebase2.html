@@ -1,0 +1,208 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Application</title>
+    <style>
+        body{
+            text-align: center;
+               /* background-image: radial-gradient(blue,orange);*/
+               background-image:linear-gradient(to right,pink,yellow);
+               /* background-image:linear-gradient(45deg,tan,red,teal) */
+        }
+
+       
+    </style>
+</head>
+<body>
+
+    <form>
+        <div class="container">
+            <h1>CRUD Application</h1>
+
+            <label><b>First Name</b></label>
+            <input type="text" placeholder="Enter first name" name="f_name" id="f_name" required/>
+
+            <label><b>Last Name</b></label>
+            <input type="text" placeholder="Enter last name" name="l_name" id="l_name" required/>
+
+            <label><b>Roll No</b></label>
+            <input type="text" placeholder="Enter roll no" name="roll_no"  id="roll_no" required/><br><br>
+
+            <button type="button" id="submitData" >Submit</button>
+            <button type="button" id="updateData">Update</button>
+            <button type="button" id="deleteItem">Delete</button>
+            <button type="button" id="getData">Get Data</button>
+         <br><br>
+
+        </div>
+    </form>
+   <center>
+    <table border="1" style="border:2px skyblue ridge";>
+
+        <thead>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Roll No</th>
+        </thead>
+        <tbody id="view_page">
+            
+        </tbody>
+    </table>
+
+</center>
+</body>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+  import { getFirestore,setDoc,doc, addDoc, collection, updateDoc, deleteDoc, getDoc, query, where, getDocs, onSnapshot} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBNzMux6HbVItMaPRhw9RFzBK8AstVKqB0",
+    authDomain: "crud-1-7b5b2.firebaseapp.com",
+    projectId: "crud-1-7b5b2",
+    storageBucket: "crud-1-7b5b2.appspot.com",
+    messagingSenderId: "926301988482",
+    appId: "1:926301988482:web:7909207499b57d18cdb69b"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  // Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
+
+//add data in firebase
+submitData.addEventListener('click',(e) => {
+
+    var f_name=document.getElementById("f_name").value;
+    var l_name=document.getElementById("l_name").value;
+    var roll_no=document.getElementById("roll_no").value;
+
+    addDoc(collection(db, "Students"), {
+        f_name:f_name,
+        l_name:l_name,
+        roll_no:roll_no
+    });
+    alert("user added")
+})
+
+
+//update data function
+updateData.addEventListener('click',(e) => {
+ 
+    
+    var f_name=document.getElementById("f_name").value;
+    var l_name=document.getElementById("l_name").value;
+    var roll_no=document.getElementById("roll_no").value;
+
+    updateDoc(doc(db, "Students", 'mHOeCazusNdoQcVyRRCc'),{
+        f_name:f_name,
+        l_name:l_name,
+        roll_no:roll_no
+    });
+      alert("user updated")
+    
+})
+
+
+
+
+
+//delete function
+deleteItem.addEventListener('click', (e) =>  {
+
+var f_name=document.getElementById("f_name").value;
+var l_name=document.getElementById("l_name").value;
+var roll_no=document.getElementById("roll_no").value;
+
+deleteDoc(doc(db, "Students", 'mHOeCazusNdoQcVyRRCc'),);
+
+alert("user deleted");
+
+} );
+
+
+//read data function
+
+getData.addEventListener('click', (e) =>  {
+
+ getDoc(doc(db, 'Students' ,'vkgobfYxjF03fs60tflV')).then(docSnap  => {
+
+     if(docSnap.exists())  {
+
+         console.log('Document data: ', docSnap.data()['First Name'])  //first name or last name or roll no one item are accepted not two or more items
+
+     }
+
+     else{
+
+         console.log('no such data!')
+
+     }
+ })
+})
+
+
+
+
+//  get data with query
+ const q =query(collection(db, "Students"), where("roll_no", "==", '6'));
+
+ getDocs(q).then(docSnap =>  {
+     let Students= [];
+     docSnap.forEach((doc) =>  {
+         Students.push({ ...doc.data(), id:doc.id })
+     });
+     console.log("Document data: ",Students[0])//[0]is used to convert in object otherwise show array
+     })
+    
+
+
+//listen for realtime updates
+const unsub = onSnapshot(doc(db, "Students", 'vkgobfYxjF03fs60tflV'), (doc) => {
+    console.log("Current data:" ,doc.data());
+})
+
+
+
+//get all data
+ getDocs(collection(db, "Students")).then(docSnap => {     
+     let Students=[];
+
+     docSnap.forEach((doc) =>  {
+         Students.push({ ...doc.data(), id:doc.id })
+     });
+     console.log("Document data: ",Students)
+     })
+    
+    
+
+
+
+
+let table_data=""
+ getDocs(collection(db, "Students")).then(docSnap => {     
+     let Students=[];
+
+     docSnap.forEach((doc) =>  {
+
+        table_data=table_data + `<tr><td>${doc.data().f_name}</td>
+            <td>${doc.data().l_name}</td>
+            <td>${doc.data().roll_no}</td><td><a href="firebase2.html?${doc.id}">Delete</a></td></tr>`
+        })
+        document.getElementById("view_page").innerHTML=table_data
+        
+    })
+      
+
+</script>
+
+
+
+</html>

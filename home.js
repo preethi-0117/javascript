@@ -1,53 +1,62 @@
-let main="Agaram"
-
-function storeData(){ 
-      localStorage.setItem("details",main);
+if(true){
+  var a=1
+  let b=1
+    console.log(b)
 }
+  //console.log(b) let is working only in {}
+  console.log(a)
 
-function getData(){
-     let localData=localStorage.getItem("details");
-     
-     alert(localData)
-}
+  
+  
+//   for (var i=0;i<5;i++){
+    
+//   }
+//  console.log(i)     //forloop is not correctly console for var only console outer
 
 
-let wel=[2,3,5]
 
-function storeData(){ 
-      localStorage.setItem("details",wel);
-}
+//  for (var i=0;i<5;i++){
 
-function getData(){
-     let localData=localStorage.getItem("details");
-     
-     alert(localData)
-}
+//   console.log(i)   
+//  }
 
-let list=[2,3,5]
 
-function storeData(){ 
-    let convertedName= JSON.stringify(list)
-      sessionStorage.setItem("test",convertedName);
-}
 
-function getData(){
-     let data=sessionStorage.getItem("test");
-     let arrayData=JSON.parse(data)
-     console.log(arrayData)
-    //  alert(data)
-    alert(1)
-}
+// function add(input1,input2,input3=0,input4=0){   //default parameter
+//   console.log(input1+input2+input3+input4)
+// }
 
-let array=[2,3,5]
+// add (5,6,7,8)     
+// add(5,6)       //3rd 4th values are assigned in paramater 
+// add(5,6,7)     //4th value is 0 
 
-function storeData(){ 
-    let convertedName= JSON.stringify(array)
-      localStorage.setItem("details",convertedName);
-}
 
-function getData(){
-     let data=localStorage.getItem("details");
-     let arrayData=JSON.parse(data)
-     console.log(arrayData)
-    //  alert(localData)
-}
+
+// function add(...args){     //rest parameter method
+//   let total=0
+//   for (let each of args){
+//     total=total+each
+//   }
+//   console.log(total)
+// }
+
+// add(1,2,3,4,5,6,7,8,9)  //many arguments are passed in parameter , ... method is used to many arguments
+
+
+
+// let z=[2,3,4]
+// let y=[5,6]
+// let x=[...z,...y]    //two array from one array , spread operator
+
+// console.log(x)  
+
+
+
+
+
+
+
+
+
+
+

@@ -1,62 +1,44 @@
-if(true){
-  var a=1
-  let b=1
-    console.log(b)
-}
-  //console.log(b) let is working only in {}
-  console.log(a)
+// let names=["Preethi","Pavithra","Anu"]
+// names.sort()
 
-  
-  
-//   for (var i=0;i<5;i++){
-    
-//   }
-//  console.log(i)     //forloop is not correctly console for var only console outer
+// console.log(names)
 
 
+let integer=[3,1,9,4,7]
 
-//  for (var i=0;i<5;i++){
+integer.sort()
 
-//   console.log(i)   
-//  }
+console.log(integer)
+
+
+//sort() method 
+let names=["Preethi","Pavithra","Anu"]
+names.sort()
+
+console.log(names)
 
 
 
-// function add(input1,input2,input3=0,input4=0){   //default parameter
-//   console.log(input1+input2+input3+input4)
-// }
+// let integer=[3,11,9,4,7,0]
 
-// add (5,6,7,8)     
-// add(5,6)       //3rd 4th values are assigned in paramater 
-// add(5,6,7)     //4th value is 0 
+// integer.sort()
+
+// console.log(integer)
 
 
 
-// function add(...args){     //rest parameter method
-//   let total=0
-//   for (let each of args){
-//     total=total+each
-//   }
-//   console.log(total)
-// }
+//ascending order sort()
+// let integer=[4,11,9,3,7]
 
-// add(1,2,3,4,5,6,7,8,9)  //many arguments are passed in parameter , ... method is used to many arguments
+// integer.sort((a,b)=>a-b)
+
+// console.log(integer)
 
 
 
-// let z=[2,3,4]
-// let y=[5,6]
-// let x=[...z,...y]    //two array from one array , spread operator
+//descending number sort()arrow function
+let integer=[4,11,9,3,7]
 
-// console.log(x)  
+integer.sort((a,b)=>b-a)
 
-
-
-
-
-
-
-
-
-
-
+console.log(integer)

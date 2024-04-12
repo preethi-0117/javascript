@@ -43,15 +43,15 @@
 
 //multiplying array in same length
 
-// let a=[1,2,3,4,6]
+let a=[1,2,3,4,6]
 
-// let b=[8,2,1,4,3]
+let b=[8,2,1,4,3]
 
-// let multiply=a.map((first,i)=>{
-//   return a[i]*b[i]
-// })
+let multiply=a.map((first,i)=>{
+  return a[i]*b[i]
+})
 
-// console.log(multiply)
+console.log(multiply)
 
 
 
